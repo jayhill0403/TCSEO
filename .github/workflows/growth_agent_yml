@@ -1,0 +1,36 @@
+name: 24/7 TagCraft Automated Marketer
+
+on:
+  schedule:
+    - cron: '0 0,4,8,12,16,20 * * *' # Runs automatically every 4 hours
+  workflow_dispatch: # Allows you to trigger it manually anytime
+
+jobs:
+  market:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests
+
+      - name: Run Marketer
+        env:
+          GROQ_API_KEY: ${{ secrets::GROQ_API_KEY }}
+        run: |
+          python growth_agent.py
+
+      - name: Commit History and Generated SEO Pages
+        run: |
+          git config --global user.name "TagCraftBot"
+          git config --global user.email "bot@tagcraft.app"
+          git add history.json docs/
+          git commit -m "Automated marketing run complete [skip ci]" || exit 0
+          git push
