@@ -20,7 +20,7 @@ from pathlib import Path
 
 # --- Config & Keys ---
 # Pulls from your second Groq key slot to bypass rate limits
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY_2", "")
+GROQ_API_KEY = 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
 
 if not GROQ_API_KEY:
     print("Error: GROQ_API_KEY_2 environment variable is missing.")
