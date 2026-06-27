@@ -20,7 +20,9 @@ from pathlib import Path
 
 # --- Config & Keys ---
 # Pulls from your second Groq key slot to bypass rate limits
+# Force the key directly
 GROQ_API_KEY = "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"
+
 
 
 if not GROQ_API_KEY:
